@@ -12,6 +12,7 @@ import { FaUser, FaSignOutAlt } from 'react-icons/fa'; // Importar icono de desl
 import personajesImg from './assets/personajes.jpg';
 import planetasImg from './assets/planetas1.jpg';
 import logo from './assets/Dragon_Ball_Logo_PNG1.png';
+import fondoGris from './assets/fondo-gris.jpeg'; // Importar la imagen de fondo
 
 function App() {
   const [carritoPersonajes, setCarritoPersonajes] = useState<Character[]>([]); // Carrito para personajes
@@ -33,7 +34,10 @@ function App() {
 
   return (
     <Router>
-      <div className="min-h-screen w-screen flex flex-col items-center justify-center p-8 text-center bg-black text-orange-500 relative font-sans">
+      <div 
+        className="min-h-screen w-screen flex flex-col items-center justify-center p-8 text-center text-orange-500 relative font-sans"
+        style={{ backgroundImage: `url(${fondoGris})`, backgroundSize: 'cover', backgroundPosition: 'center' }} // Aplicar el fondo
+      >
         <nav className="fixed top-0 right-0 left-0 flex items-center justify-between bg-black text-orange-500 px-4 py-2 shadow-lg z-50 border-b-4 border-orange-500">
           <Link to="/" className="text-lg font-medium hover:underline">Inicio</Link>
           <img 

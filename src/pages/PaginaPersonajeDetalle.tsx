@@ -9,7 +9,11 @@ function PaginaPersonajeDetalle() {
   if (!isAuthenticated) {
     return (
       <div className="text-center">
-        <img src={vegetaErrorImg} alt="Error Vegeta" className="mx-auto w-64 h-auto mb-4" /> {/* Mostrar imagen */}
+        <img 
+          src={vegetaErrorImg} 
+          alt="Error Vegeta" 
+          className="mx-auto w-64 h-auto mb-4 bg-transparent rounded-full shadow-lg" 
+        /> {/* Aplicar fondo transparente y estilos adicionales */}
         <p className="text-orange-500 font-bold">Acceso denegado. Por favor, inicia sesión.</p>
       </div>
     );

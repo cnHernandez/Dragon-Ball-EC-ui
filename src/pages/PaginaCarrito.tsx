@@ -18,7 +18,11 @@ function PaginaCarrito({ carritoPersonajes, carritoPlanetas, eliminarPersonaje, 
   if (!isAuthenticated) {
     return (
       <div className="text-center">
-        <img src={vegetaErrorImg} alt="Error Vegeta" className="mx-auto w-64 h-auto mb-4" /> {/* Mostrar imagen */}
+        <img 
+          src={vegetaErrorImg} 
+          alt="Error Vegeta" 
+          className="mx-auto w-64 h-auto mb-4 bg-transparent rounded-full shadow-lg" 
+        /> {/* Aplicar fondo transparente y estilos adicionales */}
         <p className="text-orange-500 font-bold">Acceso denegado. Por favor, inicia sesión.</p>
       </div>
     );
@@ -43,7 +47,11 @@ function PaginaCarrito({ carritoPersonajes, carritoPlanetas, eliminarPersonaje, 
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
           {carritoPersonajes.map((personaje) => (
-            <div key={personaje.id} className="flex flex-col items-center bg-gray-800 bg-opacity-80 p-4 rounded">
+            <div
+              key={personaje.id}
+              className="flex flex-col items-center bg-opacity-80 p-4 rounded"
+              style={{ backgroundImage: `url(${fondoGrisImg})`, backgroundSize: 'cover' }} // Establecer imagen de fondo
+            >
               <img src={personaje.image} alt={personaje.name} className="w-32 h-32 object-contain" />
               <p className="mt-2 text-lg font-medium">Precio: ${personaje.price}</p>
               <p className="mt-2 text-lg font-medium">Cantidad: {personaje.cantidad}</p> {/* Mostrar cantidad */}
@@ -56,7 +64,11 @@ function PaginaCarrito({ carritoPersonajes, carritoPlanetas, eliminarPersonaje, 
             </div>
           ))}
           {carritoPlanetas.map((planeta) => (
-            <div key={planeta.id} className="flex flex-col items-center bg-gray-800 bg-opacity-80 p-4 rounded">
+            <div
+              key={planeta.id}
+              className="flex flex-col items-center bg-opacity-80 p-4 rounded"
+              style={{ backgroundImage: `url(${fondoGrisImg})`, backgroundSize: 'cover' }} // Establecer imagen de fondo
+            >
               <img src={planeta.image} alt={planeta.name} className="w-32 h-32 object-contain" />
               <p className="mt-2 text-lg font-medium">Precio: ${planeta.price}</p>
               <p className="mt-2 text-lg font-medium">Cantidad: {planeta.cantidad}</p> {/* Mostrar cantidad */}

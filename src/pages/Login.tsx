@@ -18,8 +18,8 @@ function Login() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-black text-orange-500">
-      <form onSubmit={handleLogin} className="bg-gray-800 p-8 rounded shadow-lg text-white w-full max-w-sm">
+   
+      <form onSubmit={handleLogin} className="bg-black-800 p-8 rounded shadow-lg text-white w-full max-w-sm">
         <h2 className="text-2xl font-bold mb-4">Iniciar Sesión</h2>
         {error && <p className="text-red-500 mb-4">{error}</p>}
         <div className="mb-4">
@@ -47,7 +47,7 @@ function Login() {
           Iniciar Sesión
         </button>
       </form>
-    </div>
+    
   );
 }
 

@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { usePlanetas } from '../hooks/usePlanetas';
 import { Planet } from '../services/dragonBallApi';
 import vegetaErrorImg from '../assets/vegeta-error.jpeg'; // Importar la imagen de error
+import fondoGrisImg from '../assets/fondo-gris.jpeg'; // Importar la imagen de fondo
 
 interface PaginaPlanetasProps {
   carrito: Planet[];
@@ -31,7 +32,11 @@ function PaginaPlanetas({ setCarrito }: PaginaPlanetasProps) {
   if (!isAuthenticated) {
     return (
       <div className="text-center">
-        <img src={vegetaErrorImg} alt="Error Vegeta" className="mx-auto w-64 h-auto mb-4" /> {/* Mostrar imagen */}
+        <img 
+          src={vegetaErrorImg} 
+          alt="Error Vegeta" 
+          className="mx-auto w-64 h-auto mb-4 bg-transparent rounded-full shadow-lg" 
+        /> {/* Aplicar fondo transparente y estilos adicionales */}
         <p className="text-orange-500 font-bold">Acceso denegado. Por favor, inicia sesión.</p>
       </div>
     );
@@ -59,7 +64,11 @@ function PaginaPlanetas({ setCarrito }: PaginaPlanetasProps) {
       </Link>
       <div className="grid grid-cols-3 gap-4 mt-8">
         {planetas.map((planeta) => (
-          <div key={planeta.id} className="border rounded shadow p-4 bg-gray-800 text-white transition-transform transform hover:scale-105">
+          <div
+            key={planeta.id}
+            className="border rounded shadow p-4 text-white transition-transform transform hover:scale-105"
+            style={{ backgroundImage: `url(${fondoGrisImg})`, backgroundSize: 'cover' }} // Establecer imagen de fondo
+          >
             <h2 className="text-2xl font-bold">{planeta.name}</h2>
             <img src={planeta.image} alt={planeta.name} className="w-full h-auto max-h-64 object-contain transition-transform transform hover:scale-110" />
             <p>{planeta.description}</p>
