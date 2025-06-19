@@ -21,7 +21,7 @@ function Login() {
    
       <form onSubmit={handleLogin} className="bg-black-800 p-8 rounded shadow-lg text-white w-full max-w-sm">
         <h2 className="text-2xl font-bold mb-4">Iniciar Sesión</h2>
-        {error && <p className="text-red-500 mb-4">{error}</p>}
+        {error && <p className="text-orange-600 mb-4 font-bold">{error}</p>}
         <div className="mb-4">
           <label htmlFor="username" className="block mb-2">Usuario</label>
           <input

@@ -50,7 +50,7 @@ function App() {
               🛒 {/* Emoji de carrito */}
               {(carritoPersonajes.reduce((acc, personaje) => acc + (personaje.cantidad || 0), 0) +
                 carritoPlanetas.reduce((acc, planeta) => acc + (planeta.cantidad || 0), 0)) > 0 && (
-                <span className="ml-2 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
+                <span className="ml-2 bg-orange-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
                   {carritoPersonajes.reduce((acc, personaje) => acc + (personaje.cantidad || 0), 0) +
                    carritoPlanetas.reduce((acc, planeta) => acc + (planeta.cantidad || 0), 0)} {/* Contador total */}
                 </span>

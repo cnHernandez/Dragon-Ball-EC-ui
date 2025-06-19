@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import { usePlanetas } from '../hooks/usePlanetas';
 import { Planet } from '../services/dragonBallApi';
-import vegetaErrorImg from '../assets/vegeta-error.jpeg'; // Importar la imagen de error
+import vegetaErrorImg from '../assets/vegetaV.jpeg'; // Importar la imagen de error
 import fondoGrisImg from '../assets/fondo-gris.jpeg'; // Importar la imagen de fondo
 
 interface PaginaPlanetasProps {
@@ -53,7 +53,7 @@ function PaginaPlanetas({ setCarrito }: PaginaPlanetasProps) {
   return (
     <div className="min-h-screen w-screen flex flex-col items-center justify-center p-8 text-center bg-black text-orange-500">
       {mensaje && (
-        <div className="fixed top-4 left-1/2 transform -translate-x-1/2 bg-green-500 text-white px-4 py-2 rounded shadow-lg z-50">
+        <div className="fixed top-4 left-1/4 transform -translate-x-1/2 bg-orange-500 text-white px-4 py-2 rounded shadow-lg z-50">
           {mensaje}
         </div>
       )}

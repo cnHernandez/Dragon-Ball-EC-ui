@@ -1,7 +1,7 @@
 import { useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { fetchCharacterById, Character } from '../services/dragonBallApi';
-import vegetaErrorImg from '../assets/vegeta-error.jpeg'; // Importar la imagen de error
+import vegetaErrorImg from '../assets/vegetaV.jpeg'; // Importar la imagen de error
 
 function PaginaPersonajeDetalle() {
   const isAuthenticated = localStorage.getItem('isAuthenticated') === 'true'; // Verificar autenticación

@@ -1,7 +1,7 @@
 import { Character, Planet } from '../services/dragonBallApi';
 import gokuBlackImg from '../assets/goku-black.jpg'; // Importar la imagen de fondo
 import fondoGrisImg from '../assets/fondo-gris.jpeg'; // Importar la nueva imagen de fondo
-import vegetaErrorImg from '../assets/vegeta-error.jpeg'; // Importar la imagen de error
+import vegetaErrorImg from '../assets/vegetaV.jpeg'; // Importar la imagen de error
 
 interface PaginaCarritoProps {
   carritoPersonajes: Character[];

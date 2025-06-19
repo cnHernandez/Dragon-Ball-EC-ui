@@ -3,7 +3,7 @@ import useObtenerPersonajes from '../hooks/useFetchCharacters';
 import { fetchCharacterById, Character } from '../services/dragonBallApi';
 import ListaPersonajes from '../components/CharacterList'; // Eliminar la importación de ListaPersonajesProps
 import ListaTransformaciones from '../components/TransformationsList';
-import vegetaErrorImg from '../assets/vegeta-error.jpeg'; // Importar la imagen de error
+import vegetaErrorImg from '../assets/vegetaV.jpeg'; // Importar la imagen de error
 
 
 
