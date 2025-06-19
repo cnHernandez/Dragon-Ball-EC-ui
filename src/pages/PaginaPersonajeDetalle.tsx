@@ -1,8 +1,20 @@
 import { useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { fetchCharacterById, Character } from '../services/dragonBallApi';
+import vegetaErrorImg from '../assets/vegeta-error.jpeg'; // Importar la imagen de error
 
 function PaginaPersonajeDetalle() {
+  const isAuthenticated = localStorage.getItem('isAuthenticated') === 'true'; // Verificar autenticación
+
+  if (!isAuthenticated) {
+    return (
+      <div className="text-center">
+        <img src={vegetaErrorImg} alt="Error Vegeta" className="mx-auto w-64 h-auto mb-4" /> {/* Mostrar imagen */}
+        <p className="text-orange-500 font-bold">Acceso denegado. Por favor, inicia sesión.</p>
+      </div>
+    );
+  }
+
   const { id } = useParams<{ id: string }>();
   const [personaje, setPersonaje] = useState<Character | null>(null);
   const [cargando, setCargando] = useState<boolean>(true);

@@ -18,6 +18,7 @@ export interface Character {
     deletedAt: string | null;
   };
   transformations?: Transformation[];
+  price?: number; // Agregar propiedad opcional 'price'
 }
 
 export interface Transformation {
@@ -35,6 +36,7 @@ export interface Planet {
   description: string;
   image: string;
   deletedAt: string | null;
+  price?: number; // Agregar propiedad opcional 'price'
 }
 
 const API_URL = 'https://dragonball-api.com/api/characters';

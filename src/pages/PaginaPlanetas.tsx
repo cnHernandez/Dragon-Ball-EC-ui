@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import { usePlanetas } from '../hooks/usePlanetas';
 import { Planet } from '../services/dragonBallApi';
+import vegetaErrorImg from '../assets/vegeta-error.jpeg'; // Importar la imagen de error
 
 interface PaginaPlanetasProps {
   carrito: Planet[];
@@ -10,13 +11,24 @@ interface PaginaPlanetasProps {
 
 function PaginaPlanetas({ setCarrito }: PaginaPlanetasProps) {
   const { planetas, cargando, error } = usePlanetas();
+  const isAuthenticated = localStorage.getItem('isAuthenticated') === 'true'; // Verificar autenticación
   const [mensaje, setMensaje] = useState<string | null>(null); // Estado para el mensaje
 
   const agregarAlCarrito = (planeta: Planet) => {
-    setCarrito((prevCarrito) => [...prevCarrito, planeta]); // Agregar planeta al carrito
-    setMensaje(`${planeta.name} agregado al carrito`); // Mostrar mensaje
+    const planetaConPrecio = { ...planeta, price: 200 }; // Agregar precio ficticio
+    setCarrito((prevCarrito) => [...prevCarrito, planetaConPrecio]);
+    setMensaje(`${planeta.name} agregado al carrito por $${planetaConPrecio.price}`); // Mostrar mensaje con precio
     setTimeout(() => setMensaje(null), 2000); // Ocultar mensaje después de 3 segundos
   };
+
+  if (!isAuthenticated) {
+    return (
+      <div className="text-center">
+        <img src={vegetaErrorImg} alt="Error Vegeta" className="mx-auto w-64 h-auto mb-4" /> {/* Mostrar imagen */}
+        <p className="text-orange-500 font-bold">Acceso denegado. Por favor, inicia sesión.</p>
+      </div>
+    );
+  }
 
   if (cargando) {
     return <p className="text-white">Cargando planetas...</p>;
@@ -44,6 +56,7 @@ function PaginaPlanetas({ setCarrito }: PaginaPlanetasProps) {
             <h2 className="text-2xl font-bold">{planeta.name}</h2>
             <img src={planeta.image} alt={planeta.name} className="w-full h-auto max-h-64 object-contain transition-transform transform hover:scale-110" />
             <p>{planeta.description}</p>
+            <p className="mt-2 text-lg font-medium">Precio: $200</p> {/* Mostrar precio ficticio */}
             <button
               onClick={() => agregarAlCarrito(planeta)}
               className="mt-4 px-4 py-2 bg-orange-500 text-black rounded hover:bg-orange-600"

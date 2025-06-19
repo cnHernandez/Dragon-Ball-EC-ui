@@ -20,6 +20,7 @@ const TarjetaPersonaje: React.FC<TarjetaPersonajeProps> = ({ personaje, onMasInf
       <p><strong>Ki Máximo:</strong> {personaje.maxKi}</p>
       <p><strong>Afiliación:</strong> {personaje.affiliation}</p>
       {personaje.originPlanet && <p><strong>Planeta de Origen:</strong> {personaje.originPlanet.name}</p>}
+      <p className="mt-2 text-lg font-medium">Precio: $100</p> {/* Mostrar precio ficticio */}
       <div className="flex space-x-4 mt-4">
         <button onClick={() => onMasInfo(personaje.id)} className={claseBoton}>+info</button>
         <button onClick={() => onAgregarAlCarrito(personaje)} className="px-4 py-2 bg-orange-500 text-black rounded hover:bg-orange-600">

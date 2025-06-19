@@ -3,6 +3,8 @@ import useObtenerPersonajes from '../hooks/useFetchCharacters';
 import { fetchCharacterById, Character } from '../services/dragonBallApi';
 import ListaPersonajes from '../components/CharacterList'; // Eliminar la importación de ListaPersonajesProps
 import ListaTransformaciones from '../components/TransformationsList';
+import vegetaErrorImg from '../assets/vegeta-error.jpeg'; // Importar la imagen de error
+
 
 
 interface PaginaPersonajesProps {
@@ -11,6 +13,17 @@ interface PaginaPersonajesProps {
 }
 
 function PaginaPersonajes({ setCarrito }: PaginaPersonajesProps) {
+  const isAuthenticated = localStorage.getItem('isAuthenticated') === 'true'; // Verificar autenticación
+
+  if (!isAuthenticated) {
+    return (
+      <div className="text-center">
+        <img src={vegetaErrorImg} alt="Error Vegeta" className="mx-auto w-64 h-auto mb-4" /> {/* Mostrar imagen */}
+        <p className="text-orange-500 font-bold">Acceso denegado. Por favor, inicia sesión.</p>
+      </div>
+    );
+  }
+
   const { personajes, cargando, error } = useObtenerPersonajes();
   const [terminoBusqueda, setTerminoBusqueda] = useState('');
   const [personajeSeleccionado, setPersonajeSeleccionado] = useState<Character | null>(null);
@@ -49,8 +62,9 @@ function PaginaPersonajes({ setCarrito }: PaginaPersonajesProps) {
   };
 
   const agregarAlCarrito = (personaje: Character) => {
-    setCarrito((prevCarrito) => [...prevCarrito, personaje]);
-    setMensaje(`${personaje.name} agregado al carrito`); // Mostrar mensaje
+    const personajeConPrecio = { ...personaje, price: 100 }; // Agregar precio ficticio
+    setCarrito((prevCarrito) => [...prevCarrito, personajeConPrecio]);
+    setMensaje(`${personaje.name} agregado al carrito por $${personajeConPrecio.price}`); // Mostrar mensaje con precio
     setTimeout(() => setMensaje(null), 2000); // Ocultar mensaje después de 3 segundos
   };
 

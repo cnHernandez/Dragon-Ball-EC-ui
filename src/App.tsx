@@ -6,6 +6,8 @@ import PaginaPlanetas from './pages/PaginaPlanetas';
 import PaginaPersonajes from './pages/PaginaPersonajes';
 import PaginaCarrito from './pages/PaginaCarrito';
 import PaginaPersonajeDetalle from './pages/PaginaPersonajeDetalle';
+import Login from './pages/Login';
+import { FaUser, FaSignOutAlt } from 'react-icons/fa'; // Importar icono de deslogueo
 
 import personajesImg from './assets/personajes.jpg';
 import planetasImg from './assets/planetas1.jpg';
@@ -24,6 +26,11 @@ function App() {
     setCarritoPlanetas((prevCarrito) => prevCarrito.filter((planeta) => planeta.id !== id));
   };
 
+  const handleLogout = () => {
+    localStorage.removeItem('isAuthenticated'); // Limpiar estado de autenticación
+    window.location.reload(); // Recargar la aplicación
+  };
+
   return (
     <Router>
       <div className="min-h-screen w-screen flex flex-col items-center justify-center p-8 text-center bg-black text-orange-500 relative font-sans">
@@ -34,16 +41,27 @@ function App() {
             alt="Dragon Ball Logo" 
             className="w-32 h-auto mx-auto" // Centrar el logo
           />
-          <Link to="/carrito" className="relative flex items-center">
-            🛒 {/* Emoji de carrito */}
-            {(carritoPersonajes.length + carritoPlanetas.length) > 0 && (
-              <span className="ml-2 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
-                {carritoPersonajes.length + carritoPlanetas.length} {/* Contador total */}
-              </span>
-            )}
-          </Link>
+          <div className="flex items-center space-x-4">
+            <Link to="/carrito" className="relative flex items-center">
+              🛒 {/* Emoji de carrito */}
+              {(carritoPersonajes.length + carritoPlanetas.length) > 0 && (
+                <span className="ml-2 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
+                  {carritoPersonajes.length + carritoPlanetas.length} {/* Contador total */}
+                </span>
+              )}
+            </Link>
+            <Link to="/login">
+              <FaUser className="text-xl cursor-pointer" title="Iniciar sesión" /> {/* Icono de usuario */}
+            </Link>
+            <FaSignOutAlt 
+              onClick={handleLogout} 
+              className="text-xl cursor-pointer hover:text-orange-600 transition" 
+              title="Cerrar sesión" 
+            /> {/* Icono de deslogueo */}
+          </div>
         </nav>
         <Routes>
+          <Route path="/login" element={<Login />} />
           <Route path="/" element={
             <div className="flex flex-col items-center">
               <nav className="flex space-x-8">
