@@ -106,6 +106,8 @@ function App() {
                 carritoPlanetas={carritoPlanetas}
                 eliminarPersonaje={eliminarPersonaje}
                 eliminarPlaneta={eliminarPlaneta}
+                setCarritoPersonajes={setCarritoPersonajes} // Pasar función para vaciar personajes
+                setCarritoPlanetas={setCarritoPlanetas} // Pasar función para vaciar planetas
               />
             }
           />

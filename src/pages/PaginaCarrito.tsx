@@ -8,9 +8,11 @@ interface PaginaCarritoProps {
   carritoPlanetas: Planet[];
   eliminarPersonaje: (id: number) => void;
   eliminarPlaneta: (id: number) => void;
+  setCarritoPersonajes: (personajes: Character[]) => void;
+  setCarritoPlanetas: (planetas: Planet[]) => void;
 }
 
-function PaginaCarrito({ carritoPersonajes, carritoPlanetas, eliminarPersonaje, eliminarPlaneta }: PaginaCarritoProps) {
+function PaginaCarrito({ carritoPersonajes, carritoPlanetas, eliminarPersonaje, eliminarPlaneta, setCarritoPersonajes, setCarritoPlanetas }: PaginaCarritoProps) {
   const isAuthenticated = localStorage.getItem('isAuthenticated') === 'true'; // Verificar autenticación
 
   if (!isAuthenticated) {
@@ -21,6 +23,11 @@ function PaginaCarrito({ carritoPersonajes, carritoPlanetas, eliminarPersonaje, 
       </div>
     );
   }
+
+  const vaciarCarrito = () => {
+    setCarritoPersonajes([]); // Vaciar personajes
+    setCarritoPlanetas([]); // Vaciar planetas
+  };
 
   const total = carritoPersonajes.reduce((acc, personaje) => acc + (personaje.price || 0), 0) +
                 carritoPlanetas.reduce((acc, planeta) => acc + (planeta.price || 0), 0); // Calcular total
@@ -67,6 +74,14 @@ function PaginaCarrito({ carritoPersonajes, carritoPlanetas, eliminarPersonaje, 
       >
         <h2 className="text-3xl font-bold text-orange-500">Total: ${total}</h2>
       </div>
+      {carritoPersonajes.length > 0 || carritoPlanetas.length > 0 ? ( // Mostrar botón solo si hay elementos
+        <button
+          onClick={vaciarCarrito}
+          className="mt-4 px-4 py-2 bg-orange-500 text-black rounded hover:bg-orange-600 transition"
+        >
+          Vaciar Carrito
+        </button>
+      ) : null}
     </div>
   );
 }
