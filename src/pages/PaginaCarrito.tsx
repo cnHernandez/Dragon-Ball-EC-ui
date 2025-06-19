@@ -68,12 +68,14 @@ function PaginaCarrito({ carritoPersonajes, carritoPlanetas, eliminarPersonaje, 
           ))}
         </div>
       )}
-      <div
-        className="mt-8 p-12 rounded-lg shadow-lg text-center bg-cover bg-center transition-transform transform hover:scale-120"
-        style={{ backgroundImage: `url(${gokuBlackImg})` }}
-      >
-        <h2 className="text-3xl font-bold text-orange-500">Total: ${total}</h2>
-      </div>
+      {carritoPersonajes.length > 0 || carritoPlanetas.length > 0 ? ( // Mostrar total solo si hay elementos
+        <div
+          className="mt-8 p-12 rounded-lg shadow-lg text-center bg-cover bg-center transition-transform transform hover:scale-120"
+          style={{ backgroundImage: `url(${gokuBlackImg})` }}
+        >
+          <h2 className="text-3xl font-bold text-orange-500">Total: ${total}</h2>
+        </div>
+      ) : null}
       {carritoPersonajes.length > 0 || carritoPlanetas.length > 0 ? ( // Mostrar botón solo si hay elementos
         <button
           onClick={vaciarCarrito}
