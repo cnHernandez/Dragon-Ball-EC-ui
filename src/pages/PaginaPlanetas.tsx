@@ -15,10 +15,17 @@ function PaginaPlanetas({ setCarrito }: PaginaPlanetasProps) {
   const [mensaje, setMensaje] = useState<string | null>(null); // Estado para el mensaje
 
   const agregarAlCarrito = (planeta: Planet) => {
-    const planetaConPrecio = { ...planeta, price: 200 }; // Agregar precio ficticio
-    setCarrito((prevCarrito) => [...prevCarrito, planetaConPrecio]);
-    setMensaje(`${planeta.name} agregado al carrito por $${planetaConPrecio.price}`); // Mostrar mensaje con precio
-    setTimeout(() => setMensaje(null), 2000); // Ocultar mensaje después de 3 segundos
+    setCarrito((prevCarrito) => {
+      const existe = prevCarrito.find((item) => item.id === planeta.id);
+      if (existe) {
+        return prevCarrito.map((item) =>
+          item.id === planeta.id ? { ...item, cantidad: (item.cantidad || 1) + 1 } : item
+        );
+      }
+      return [...prevCarrito, { ...planeta, price: 200, cantidad: 1 }]; // Agregar nuevo planeta con cantidad inicial
+    });
+    setMensaje(`${planeta.name} agregado al carrito`); // Mostrar mensaje
+    setTimeout(() => setMensaje(null), 2000); // Ocultar mensaje después de 2 segundos
   };
 
   if (!isAuthenticated) {

@@ -44,9 +44,11 @@ function App() {
           <div className="flex items-center space-x-4">
             <Link to="/carrito" className="relative flex items-center">
               🛒 {/* Emoji de carrito */}
-              {(carritoPersonajes.length + carritoPlanetas.length) > 0 && (
+              {(carritoPersonajes.reduce((acc, personaje) => acc + (personaje.cantidad || 0), 0) +
+                carritoPlanetas.reduce((acc, planeta) => acc + (planeta.cantidad || 0), 0)) > 0 && (
                 <span className="ml-2 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
-                  {carritoPersonajes.length + carritoPlanetas.length} {/* Contador total */}
+                  {carritoPersonajes.reduce((acc, personaje) => acc + (personaje.cantidad || 0), 0) +
+                   carritoPlanetas.reduce((acc, planeta) => acc + (planeta.cantidad || 0), 0)} {/* Contador total */}
                 </span>
               )}
             </Link>

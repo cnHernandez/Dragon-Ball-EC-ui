@@ -29,15 +29,15 @@ function PaginaCarrito({ carritoPersonajes, carritoPlanetas, eliminarPersonaje, 
     setCarritoPlanetas([]); // Vaciar planetas
   };
 
-  const total = carritoPersonajes.reduce((acc, personaje) => acc + (personaje.price || 0), 0) +
-                carritoPlanetas.reduce((acc, planeta) => acc + (planeta.price || 0), 0); // Calcular total
+  const total = carritoPersonajes.reduce((acc, personaje) => acc + (personaje.price || 0) * (personaje.cantidad || 1), 0) +
+                carritoPlanetas.reduce((acc, planeta) => acc + (planeta.price || 0) * (planeta.cantidad || 1), 0); // Calcular total basado en cantidad
 
   return (
     <div
       className="min-h-screen w-screen flex flex-col items-center justify-center p-8 text-center text-orange-500 bg-cover bg-center"
       style={{ backgroundImage: `url(${fondoGrisImg})` }} // Establecer imagen de fondo
     >
-      <h1 className="text-3xl font-bold mb-8">Carrito de Compras</h1>
+      <h1 className="text-3xl font-bold mb-8 mt-8">Carrito de Compras</h1>
       {carritoPersonajes.length === 0 && carritoPlanetas.length === 0 ? (
         <p>No hay elementos en el carrito.</p>
       ) : (
@@ -46,6 +46,7 @@ function PaginaCarrito({ carritoPersonajes, carritoPlanetas, eliminarPersonaje, 
             <div key={personaje.id} className="flex flex-col items-center bg-gray-800 bg-opacity-80 p-4 rounded">
               <img src={personaje.image} alt={personaje.name} className="w-32 h-32 object-contain" />
               <p className="mt-2 text-lg font-medium">Precio: ${personaje.price}</p>
+              <p className="mt-2 text-lg font-medium">Cantidad: {personaje.cantidad}</p> {/* Mostrar cantidad */}
               <button
                 onClick={() => eliminarPersonaje(personaje.id)}
                 className="mt-4 px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600"
@@ -58,6 +59,7 @@ function PaginaCarrito({ carritoPersonajes, carritoPlanetas, eliminarPersonaje, 
             <div key={planeta.id} className="flex flex-col items-center bg-gray-800 bg-opacity-80 p-4 rounded">
               <img src={planeta.image} alt={planeta.name} className="w-32 h-32 object-contain" />
               <p className="mt-2 text-lg font-medium">Precio: ${planeta.price}</p>
+              <p className="mt-2 text-lg font-medium">Cantidad: {planeta.cantidad}</p> {/* Mostrar cantidad */}
               <button
                 onClick={() => eliminarPlaneta(planeta.id)}
                 className="mt-4 px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600"

@@ -62,26 +62,29 @@ function PaginaPersonajes({ setCarrito }: PaginaPersonajesProps) {
   };
 
   const agregarAlCarrito = (personaje: Character) => {
-    const personajeConPrecio = { ...personaje, price: 100 }; // Agregar precio ficticio
-    setCarrito((prevCarrito) => [...prevCarrito, personajeConPrecio]);
-    setMensaje(`${personaje.name} agregado al carrito por $${personajeConPrecio.price}`); // Mostrar mensaje con precio
-    setTimeout(() => setMensaje(null), 2000); // Ocultar mensaje después de 3 segundos
+    setCarrito((prevCarrito) => {
+      const existe = prevCarrito.find((item) => item.id === personaje.id);
+      if (existe) {
+        return prevCarrito.map((item) =>
+          item.id === personaje.id ? { ...item, cantidad: (item.cantidad || 1) + 1 } : item
+        );
+      }
+      return [...prevCarrito, { ...personaje, price: 100, cantidad: 1 }]; // Agregar nuevo personaje con cantidad inicial
+    });
+    setMensaje(`${personaje.name} agregado al carrito`); // Mostrar mensaje
+    setTimeout(() => setMensaje(null), 2000); // Ocultar mensaje después de 2 segundos
   };
 
   const claseBoton = "rounded-lg border border-transparent px-3 py-1.5 text-base font-medium bg-white text-orange-500 hover:border-blue-500 hover:shadow-lg focus:outline-none focus-visible:ring-4";
 
   return (
-    <div className="min-h-screen w-screen flex flex-col items-center justify-center p-8 text-center bg-black text-orange-500">
+    <div className="min-h-screen w-screen flex flex-col items-center justify-center p-8 text-center bg-black text-orange-500 mt-8">
       {mensaje && (
-        <div className="fixed top-4 left-1/2 transform -translate-x-1/2 bg-green-500 text-white px-4 py-2 rounded shadow-lg z-50">
+        <div className="fixed top-4 left-1/4 transform -translate-x-1/2 bg-orange-500 text-white px-4 py-2 rounded shadow-lg z-50">
           {mensaje}
         </div>
       )}
-      {personajeSeleccionado && (
-        !mostrarTransformaciones && (
-          <button onClick={manejarVolver} className={claseBoton}>Volver</button>
-        )
-      )}
+    
       {!personajeSeleccionado && (
         <input
           type="text"
@@ -102,15 +105,15 @@ function PaginaPersonajes({ setCarrito }: PaginaPersonajesProps) {
             ) : (
               <p>El personaje no tiene transformaciones</p>
             )}
+            <button onClick={() => setMostrarTransformaciones(false)} className="mt-4 px-4 py-2 bg-orange-500 text-black rounded hover:bg-orange-600 transition">
+              Volver
+            </button> {/* Botón para regresar a los detalles */}
           </div>
         ) : (
           <div className="text-center p-8">
             <h2 className="text-3xl font-bold leading-tight">{personajeSeleccionado.name}</h2>
             <img src={personajeSeleccionado.image} alt={personajeSeleccionado.name} className="w-full h-auto max-h-96 object-contain transition-transform transform hover:scale-110" />
             <p>{personajeSeleccionado.description}</p>
-            {personajeSeleccionado.transformations && personajeSeleccionado.transformations.length > 0 && (
-              <button onClick={manejarMostrarTransformaciones} className={claseBoton}>Ver Transformaciones</button>
-            )}
           </div>
         )
       ) : (
@@ -122,6 +125,14 @@ function PaginaPersonajes({ setCarrito }: PaginaPersonajesProps) {
             claseBoton={claseBoton} 
           />
         
+        </div>
+      )}
+        {personajeSeleccionado && !mostrarTransformaciones && (
+        <div className="flex space-x-4 mt-4">
+          <button onClick={manejarVolver} className={claseBoton}>Volver</button>
+          {personajeSeleccionado.transformations && personajeSeleccionado.transformations.length > 0 && (
+            <button onClick={manejarMostrarTransformaciones} className={claseBoton}>Ver Transformaciones</button>
+          )}
         </div>
       )}
     </div>
