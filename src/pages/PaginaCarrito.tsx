@@ -52,7 +52,11 @@ function PaginaCarrito({ carritoPersonajes, carritoPlanetas, eliminarPersonaje, 
               className="flex flex-col items-center bg-opacity-80 p-4 rounded"
               style={{ backgroundImage: `url(${fondoGrisImg})`, backgroundSize: 'cover' }} // Establecer imagen de fondo
             >
-              <img src={personaje.image} alt={personaje.name} className="w-32 h-32 object-contain" />
+              <img
+                src={personaje.image}
+                alt={personaje.name}
+                className="w-32 h-32 object-contain transition-transform duration-300 hover:scale-130"
+              />
               <p className="mt-2 text-lg font-medium">Precio: ${personaje.price}</p>
               <p className="mt-2 text-lg font-medium">Cantidad: {personaje.cantidad}</p> {/* Mostrar cantidad */}
               <button
@@ -69,7 +73,11 @@ function PaginaCarrito({ carritoPersonajes, carritoPlanetas, eliminarPersonaje, 
               className="flex flex-col items-center bg-opacity-80 p-4 rounded"
               style={{ backgroundImage: `url(${fondoGrisImg})`, backgroundSize: 'cover' }} // Establecer imagen de fondo
             >
-              <img src={planeta.image} alt={planeta.name} className="w-32 h-32 object-contain" />
+              <img
+                src={planeta.image}
+                alt={planeta.name}
+                className="w-32 h-32 object-contain transition-transform duration-300 hover:scale-110"
+              />
               <p className="mt-2 text-lg font-medium">Precio: ${planeta.price}</p>
               <p className="mt-2 text-lg font-medium">Cantidad: {planeta.cantidad}</p> {/* Mostrar cantidad */}
               <button
